@@ -1,0 +1,17 @@
+name: Notify Parent Repository
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.PAT }}
+          repository: kakitomeru/kakitomeru
+          event-type: submodule-updated
