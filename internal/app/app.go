@@ -14,7 +14,7 @@ import (
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"github.com/kakitomeru/gateway/internal/api/handler"
 	"github.com/kakitomeru/gateway/internal/api/middleware"
-	"github.com/kakitomeru/shared/config"
+	"github.com/kakitomeru/gateway/internal/config"
 	"github.com/kakitomeru/shared/env"
 	"github.com/kakitomeru/shared/telemetry"
 	"go.opentelemetry.io/contrib/instrumentation/github.com/gin-gonic/gin/otelgin"
@@ -28,14 +28,14 @@ var allowedHeaders = map[string]struct{}{
 }
 
 type App struct {
-	cfg    *config.Gateway
+	cfg    *config.Config
 	host   string
 	port   string
 	gwmux  *runtime.ServeMux
 	router *gin.Engine
 }
 
-func NewApp(cfg *config.Gateway) *App {
+func NewApp(cfg *config.Config) *App {
 	router := gin.New()
 	router.Use(gin.Logger())
 

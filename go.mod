@@ -5,12 +5,13 @@ go 1.24.3
 require (
 	github.com/gin-gonic/gin v1.10.1
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.26.3
-	github.com/kakitomeru/auth v0.0.0-20250614074932-862d14d6ba04
-	github.com/kakitomeru/shared v0.0.0-20250614073903-023ba883ddcb
-	github.com/kakitomeru/snippet v0.0.0-20250614080940-2d210daadaac
+	github.com/kakitomeru/auth v0.0.0-20250615073258-629c2f964b29
+	github.com/kakitomeru/shared v0.0.0-20250615070711-489c31273206
+	github.com/kakitomeru/snippet v0.0.0-20250614100719-672b05977c09
 	go.opentelemetry.io/contrib/instrumentation/github.com/gin-gonic/gin/otelgin v0.61.0
 	go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.61.0
 	google.golang.org/grpc v1.72.2
+	gopkg.in/yaml.v3 v3.0.1
 )
 
 require (
@@ -28,7 +29,6 @@ require (
 	github.com/goccy/go-json v0.10.5 // indirect
 	github.com/golang-jwt/jwt/v5 v5.2.2 // indirect
 	github.com/google/uuid v1.6.0 // indirect
-	github.com/joho/godotenv v1.5.1 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.10 // indirect
 	github.com/leodido/go-urn v1.4.0 // indirect
@@ -56,5 +56,4 @@ require (
 	google.golang.org/genproto/googleapis/api v0.0.0-20250528174236-200df99c418a // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20250519155744-55703ea1f237 // indirect
 	google.golang.org/protobuf v1.36.6 // indirect
-	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

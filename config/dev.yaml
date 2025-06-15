@@ -1,0 +1,13 @@
+name: "gateway"
+env:
+  - jwt
+  - otel
+  - auth
+  - gateway
+  - snippet
+protected_routes:
+  - /api/v1/auth/logout
+  - /api/v1/me
+
+  - /api/v1/me/snippets
+  - /api/v1/snippets

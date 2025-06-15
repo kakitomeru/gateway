@@ -5,12 +5,12 @@ import (
 	"log"
 
 	"github.com/kakitomeru/gateway/internal/app"
-	"github.com/kakitomeru/shared/config"
+	"github.com/kakitomeru/gateway/internal/config"
 	"github.com/kakitomeru/shared/env"
 )
 
 func main() {
-	cfg, err := config.LoadGateway()
+	cfg, err := config.LoadConfig()
 	if err != nil {
 		log.Fatalf("failed to load gateway config: %v", err)
 	}
