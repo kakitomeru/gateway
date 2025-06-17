@@ -3,11 +3,12 @@ module github.com/kakitomeru/gateway
 go 1.24.3
 
 require (
+	github.com/gin-contrib/cors v1.7.5
 	github.com/gin-gonic/gin v1.10.1
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.26.3
-	github.com/kakitomeru/auth v0.0.0-20250615073258-629c2f964b29
-	github.com/kakitomeru/shared v0.0.0-20250615070711-489c31273206
-	github.com/kakitomeru/snippet v0.0.0-20250614100719-672b05977c09
+	github.com/kakitomeru/auth v0.0.0-20250615152657-b645ddcd4fc3
+	github.com/kakitomeru/shared v0.0.0-20250615152251-594a802c8178
+	github.com/kakitomeru/snippet v0.0.0-20250615152156-9f6d02343727
 	go.opentelemetry.io/contrib/instrumentation/github.com/gin-gonic/gin/otelgin v0.61.0
 	go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.61.0
 	google.golang.org/grpc v1.72.2
@@ -19,6 +20,7 @@ require (
 	github.com/bytedance/sonic/loader v0.2.4 // indirect
 	github.com/cenkalti/backoff/v5 v5.0.2 // indirect
 	github.com/cloudwego/base64x v0.1.5 // indirect
+	github.com/fatih/color v1.18.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.9 // indirect
 	github.com/gin-contrib/sse v1.1.0 // indirect
 	github.com/go-logr/logr v1.4.2 // indirect
@@ -32,6 +34,7 @@ require (
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.10 // indirect
 	github.com/leodido/go-urn v1.4.0 // indirect
+	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect

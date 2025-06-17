@@ -2,12 +2,13 @@ package handler
 
 import (
 	"context"
-	"log"
+	"fmt"
 	"time"
 
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	authpb "github.com/kakitomeru/auth/pkg/pb/v1"
 	"github.com/kakitomeru/shared/env"
+	"github.com/kakitomeru/shared/logger"
 	snippetpb "github.com/kakitomeru/snippet/pkg/pb/v1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/backoff"
@@ -32,7 +33,7 @@ func SetupHandlers(ctx context.Context, mux *runtime.ServeMux, dialOpts []grpc.D
 
 	// Setup auth service with retry
 	authEndpoint := env.GetAuthHost() + ":" + env.GetAuthPort()
-	log.Printf("Connecting to auth service at %s", authEndpoint)
+	logger.Debug(ctx, fmt.Sprintf("Connecting to auth service at %s", authEndpoint))
 	if err := authpb.RegisterAuthServiceHandlerFromEndpoint(
 		ctx, mux, authEndpoint, dialOpts,
 	); err != nil {
@@ -41,7 +42,7 @@ func SetupHandlers(ctx context.Context, mux *runtime.ServeMux, dialOpts []grpc.D
 
 	// Setup snippet service with retry
 	snippetEndpoint := env.GetSnippetHost() + ":" + env.GetSnippetPort()
-	log.Printf("Connecting to snippet service at %s", snippetEndpoint)
+	logger.Debug(ctx, fmt.Sprintf("Connecting to snippet service at %s", snippetEndpoint))
 	if err := snippetpb.RegisterSnippetServiceHandlerFromEndpoint(
 		ctx, mux, snippetEndpoint, dialOpts,
 	); err != nil {

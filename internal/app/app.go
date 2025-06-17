@@ -10,12 +10,14 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"github.com/kakitomeru/gateway/internal/api/handler"
 	"github.com/kakitomeru/gateway/internal/api/middleware"
 	"github.com/kakitomeru/gateway/internal/config"
 	"github.com/kakitomeru/shared/env"
+	"github.com/kakitomeru/shared/logger"
 	"github.com/kakitomeru/shared/telemetry"
 	"go.opentelemetry.io/contrib/instrumentation/github.com/gin-gonic/gin/otelgin"
 	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
@@ -37,6 +39,9 @@ type App struct {
 
 func NewApp(cfg *config.Config) *App {
 	router := gin.New()
+
+	router.Use(cors.Default())
+
 	router.Use(gin.Logger())
 
 	router.Use(otelgin.Middleware(
@@ -76,21 +81,23 @@ func (a *App) Start(ctx context.Context) error {
 
 	shutdownTracer, err := telemetry.NewTracerProvider(ctx, a.cfg.Name, env.GetOtelCollector())
 	if err != nil {
-		log.Fatalf("failed to create tracer provider: %v", err)
+		logger.Error(ctx, "failed to create tracer provider", err)
+		os.Exit(1)
 	}
 	defer func() {
 		if err := shutdownTracer(ctx); err != nil {
-			log.Printf("failed to shutdown tracer provider: %v", err)
+			logger.Error(ctx, "failed to shutdown tracer provider", err)
 		}
 	}()
 
 	shutdownMeter, err := telemetry.NewMeterProvider(ctx, a.cfg.Name, env.GetOtelCollector())
 	if err != nil {
-		log.Fatalf("failed to create meter provider: %v", err)
+		logger.Error(ctx, "failed to create meter provider", err)
+		os.Exit(1)
 	}
 	defer func() {
 		if err := shutdownMeter(ctx); err != nil {
-			log.Printf("failed to shutdown meter provider: %v", err)
+			logger.Error(ctx, "failed to shutdown meter provider", err)
 		}
 	}()
 
@@ -100,7 +107,8 @@ func (a *App) Start(ctx context.Context) error {
 	}
 
 	if err := handler.SetupHandlers(ctx, a.gwmux, dialOpts); err != nil {
-		return err
+		logger.Error(ctx, "failed to setup handlers", err)
+		os.Exit(1)
 	}
 
 	a.router.Group("/api/v1/*{grpc_gateway}").Any("", gin.WrapH(a.gwmux))
@@ -111,8 +119,10 @@ func (a *App) Start(ctx context.Context) error {
 	}
 
 	go func() {
+		log.Printf("Starting server on port %s", a.port)
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-			log.Fatalf("failed to start server: %v", err)
+			logger.Error(ctx, "failed to start server", err)
+			os.Exit(1)
 		}
 	}()
 
@@ -125,21 +135,23 @@ func (a *App) gracefullyShutdown(ctx context.Context, srv *http.Server) error {
 
 	select {
 	case <-quit:
-		log.Println("Received interrupt signal, shutting down server...")
+		fmt.Println()
+		logger.Debug(ctx, "Received interrupt signal, shutting down server...")
 	case <-ctx.Done():
-		log.Println("Parent context cancelled, shutting down server...")
+		fmt.Println()
+		logger.Debug(ctx, "Parent context cancelled, shutting down server...")
 	}
 
-	log.Println("Shutting down server...")
+	logger.Debug(ctx, "Shutting down server...")
 
 	ctx, cancel := context.WithTimeout(ctx, 10*time.Second)
 	defer cancel()
 
 	if err := srv.Shutdown(ctx); err != nil {
-		log.Printf("Server forced to shutdown: %v", err)
+		logger.Error(ctx, "Server forced to shutdown", err)
 		return err
 	}
 
-	log.Println("Server gracefully stopped")
+	logger.Debug(ctx, "Server gracefully stopped")
 	return nil
 }
