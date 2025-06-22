@@ -40,7 +40,12 @@ type App struct {
 func NewApp(cfg *config.Config) *App {
 	router := gin.New()
 
-	router.Use(cors.Default())
+	corsConfig := cors.DefaultConfig()
+	corsConfig.AllowOrigins = []string{"http://127.0.0.1:1234", "http://localhost:1234"}
+	corsConfig.AllowHeaders = []string{"Authorization", "Content-Type"}
+	corsConfig.AllowCredentials = true
+
+	router.Use(cors.New(corsConfig))
 
 	router.Use(gin.Logger())
 
