@@ -6,7 +6,7 @@ require (
 	github.com/gin-contrib/cors v1.7.5
 	github.com/gin-gonic/gin v1.10.1
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.27.0
-	github.com/kakitomeru/auth v0.0.0-20250622142607-8c869de8b564
+	github.com/kakitomeru/auth v0.0.0-20250623122738-8df0220fd8d6
 	github.com/kakitomeru/shared v0.0.0-20250615152251-594a802c8178
 	github.com/kakitomeru/snippet v0.0.0-20250622141900-19eb524875c0
 	go.opentelemetry.io/contrib/instrumentation/github.com/gin-gonic/gin/otelgin v0.61.0

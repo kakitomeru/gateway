@@ -49,8 +49,8 @@ github.com/grpc-ecosystem/grpc-gateway/v2 v2.27.0 h1:+epNPbD5EqgpEMm5wrl4Hqts3jZ
 github.com/grpc-ecosystem/grpc-gateway/v2 v2.27.0/go.mod h1:Zanoh4+gvIgluNqcfMVTJueD4wSS5hT7zTt4Mrutd90=
 github.com/json-iterator/go v1.1.12 h1:PV8peI4a0ysnczrg+LtxykD8LfKY9ML6u2jnxaEnrnM=
 github.com/json-iterator/go v1.1.12/go.mod h1:e30LSqwooZae/UwlEbR2852Gd8hjQvJoHmT4TnhNGBo=
-github.com/kakitomeru/auth v0.0.0-20250622142607-8c869de8b564 h1:R0imtpXqdLeXZ4HB6nJ1w1h40Ke00i5eTl+FAtH4OpA=
-github.com/kakitomeru/auth v0.0.0-20250622142607-8c869de8b564/go.mod h1:3oMAhfHcWifDBdiOhQveqjm/v0znBFckyzpI9D9ayjQ=
+github.com/kakitomeru/auth v0.0.0-20250623122738-8df0220fd8d6 h1:m1EboqZS4zskhr+zg8JSE2dWaRJseQGuYXc5v9T+958=
+github.com/kakitomeru/auth v0.0.0-20250623122738-8df0220fd8d6/go.mod h1:3oMAhfHcWifDBdiOhQveqjm/v0znBFckyzpI9D9ayjQ=
 github.com/kakitomeru/shared v0.0.0-20250615152251-594a802c8178 h1:eae/3sTuacKwJer/1IjoJA61bwoqPKl09v1UgMFug48=
 github.com/kakitomeru/shared v0.0.0-20250615152251-594a802c8178/go.mod h1:zY8aBk8RP0cUNIFzwCx7m5wkJPg5eFaoHGeje+h52LQ=
 github.com/kakitomeru/snippet v0.0.0-20250622141900-19eb524875c0 h1:iJ4XwySjJaY8e4VxVN/GFNi6O5hRfstEXm2h6/Ula+M=
